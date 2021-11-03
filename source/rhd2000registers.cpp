@@ -35,7 +35,6 @@
 using std::cerr;
 using std::endl;
 using std::vector;
-using Rhd2000RegisterInternals::register_t;
 
 namespace Rhd2000RegisterInternals {
     register0_t::register0_t() {
@@ -466,7 +465,7 @@ bool Rhd2000Registers::getAmpPowered(int channel) {
     if (channel >= 0 && channel <= 63) {
         unsigned int byteIndex = channel / 8,
                      bitIndex = channel % 8;
-        register_t bit = (1 << bitIndex);
+        Rhd2000RegisterInternals::register_t bit = (1 << bitIndex);
 
         return (registers.aPwr[byteIndex] & bit) == 0 ? false : true;
     }
@@ -483,8 +482,8 @@ void Rhd2000Registers::setAmpPowered(int channel, bool powered)
     if (channel >= 0 && channel <= 63) {
 		unsigned int byteIndex = channel / 8,
 					 bitIndex  = channel % 8;
-		register_t bit = (1 << bitIndex);
-		register_t bitmask = ~bit;
+        Rhd2000RegisterInternals::register_t bit = (1 << bitIndex);
+        Rhd2000RegisterInternals::register_t bitmask = ~bit;
 
 		registers.aPwr[byteIndex] = (registers.aPwr[byteIndex] & bitmask) | (powered ? bit : 0);
     }
@@ -518,7 +517,7 @@ void Rhd2000Registers::powerDownAllAmps()
 int Rhd2000Registers::getRegisterValue(int reg) const
 {
 	if (reg >= 0 && reg <= 21) {
-        const register_t* pRegisters = reinterpret_cast<const register_t*>(&registers);
+        const Rhd2000RegisterInternals::register_t* pRegisters = reinterpret_cast<const Rhd2000RegisterInternals::register_t*>(&registers);
         return pRegisters[reg];
 	}
     return -1;
@@ -870,6 +869,7 @@ int Rhd2000Registers::createRhd2000Command(Rhd2000CommandType commandType, int a
                 return -1;
             }
             if (arg2 < 0 || arg2 > 255) {
+                cerr << "Here... arg2: " << arg2;
                 cerr << "Error in Rhd2000Registers::createRhd2000Command: " <<
                         "Register data out of range." << endl;
                 return -1;
@@ -1003,7 +1003,7 @@ void Rhd2000Registers::readBack(const vector<int>& data) {
 	// The read at position 19 is register 63, position 20 is register 62, etc.
 	const int ReadIndices[36] = { 63, 62, 61, 60, 59, 48, 49, 50, 51, 52, 53, 54, 55, 40, 41, 42, 43, 44, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 };
 
-    register_t* pRegisters = reinterpret_cast<register_t*>(&registers);
+    Rhd2000RegisterInternals::register_t* pRegisters = reinterpret_cast<Rhd2000RegisterInternals::register_t*>(&registers);
 	for (unsigned int i = 0; i < 36; i++) {
         pRegisters[ReadIndices[i]] = data[ReadOffset + i];
 	}

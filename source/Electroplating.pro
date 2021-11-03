@@ -4,17 +4,12 @@
 #
 #-------------------------------------------------
 
-TEMPLATE      = app
-
 QT            += widgets multimedia
 
-CONFIG        += static
+TARGET = Electroplating
+TEMPLATE      = app
 
-macx:{
-QMAKE_RPATHDIR += /users/intan/Qt/5.7/clang_64/lib
-QMAKE_RPATHDIR += /users/intan/downloads/
-}
-
+DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -68,9 +63,6 @@ HEADERS  += mainwindow.h \
     significantround.h \
     impedanceplot.h
 
-
-macx: {
-LIBS += -L$$PWD/../../../Downloads/ -lokFrontPanel
-INCLUDEPATH += $$PWD/../../../Downloads
-DEPENDPATH += $$PWD/../../../Downloads
+mac: {
+LIBS += -L$$PWD/../libraries/Mac/ -lokFrontPanel
 }
