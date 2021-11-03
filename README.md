@@ -1,5 +1,5 @@
 # Electroplating
-Intan Electroplating is free software that controls an RHD Electroplating Board and an Intan 128-channel headstage to electroplate. This software allows for automatic and manual plating of all 128 channels, either individually or in a group. With update 1.03, the Windows release of this software includes an installer that automatically installs prerequisites (Opal Kelly drivers, Microsoft Visual C++ Redistributables) to make use of this software easier.
+Intan Electroplating is free software that controls an RHD Electroplating Board and an Intan 128-channel headstage to electroplate. This software allows for automatic and manual plating of all 128 channels, either individually or in a group. With update 1.03, the Windows release of this software includes an installer that automatically installs prerequisites (Opal Kelly drivers, Microsoft Visual C++ Redistributables) to make use of this software easier. Another addition is the option to select a custom range of channels to plate over a period of time.
 
 The most recent binaries are available from the Intan website: https://intantech.com or here on GitHub under Releases:
 
