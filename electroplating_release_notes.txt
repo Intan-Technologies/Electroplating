@@ -1,0 +1,7 @@
+Intan RHX release notes
+-----------------------
+
+* Version 1.03, 3 November 2021
+- First GitHub release
+- Added option to specify a custom range of channels for automatic electroplating
+- Upgraded from Qt 4 to Qt 5.12, and bundled in a Wix bootstrapper application for Windows release
